@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ng-app="app1" ng-init="person={fname:'Nahid',lname:'Rahman'};
+	capitals=[{city:'Dhaka',country:'Bangladesh'},{city:'Austin',country:'USA'},
+	{city:'Brussels',country:'Belgium'}]" ng-cloak>
+<meta charset="ISO-8859-1">
+<head>
+<title>Angular JS Practice</title>
+	<style>
+	[ng\:cloak],[ng-cloak],.ng-cloak{
+		display: none;
+	}
+	.bluetext{
+		color: blue;
+	}
+	.boldtext{
+		font-weight: bold;
+	}
+	.stripedblue{
+		color: #007FFF;
+		background-color: #DBE9F4;
+	}
+	.stripedbeige{
+		color: #CC0000;
+		background-color: #F5F5DC;
+	}
+	</style>
+</head>
+<body>
+
+<div ng-controller="ctrl1">
+<span>Values:</span>
+<input type="text" ng-model="first"/>
+<input type="text" ng-model="second"/>
+
+<button ng-click="updateValue()">calculate</button> <br><br>
+{{calculation}}
+<p> Your first data is {{first}}</p>
+
+<p> Your first data is <span data-ng-bind="second"></span></p>
+
+<p>{{person.fname}} {{person.lname}} you have entered {{first}} and {{second}}</p>
+
+<ul ng-repeat="capital in capitals">
+	<li>
+		{{'capital of'+' '+capital.country+' '+'is '+capital.city}}
+	</li>
+</ul>
+</div>
+
+<h4 ng-controller="ctrl2">Randomly generated mood: {{feelings}}</h4>
+
+<div id="groceryList" ng-controller="ctrl3">
+<h3>{{groceries.length}} groceries to get</h3>
+<h3><span ng-bind="groceries.length"></span> groceries to get</h3>
+	<ol>
+		<li>{{groceries[0].item}}</li>
+	</ol>
+	<ol start="2">
+		<li ng-repeat="grocery in groceries" ng-if="$index>0">
+			{{grocery.item}} {{$index}}
+		</li>
+	</ol>
+
+	<table>
+		<tr ng-repeat-start="grocery in groceries">
+			<td>
+				{{grocery.item}}
+			</td>
+		</tr>
+		<tr ng-repeat-end>
+			<td>
+				{{grocery.purchased}}
+			</td>
+		</tr>
+	</table>
+
+	<label>Change the item:</label>
+	<input ng-model="groceries[0].item"/>
+
+	<h3>Grocery List</h3>
+	<div ng-include="'oGroceryList.html'"></div>
+	<label>
+		<input type="checkbox" ng-model="showList">
+		Show Unordered List...
+	</label>
+	<ng-include src="getList()"></ng-include>
+
+	<label>
+		Enter a Number between 1 to 4...
+		<input type="text" ng-model="someNumber">
+	</label>
+	<div ng-switch="someNumber">
+		<p ng-switch-when="1">You entered One...</p>
+		<p ng-switch-when="2">You entered Two...</p>
+		<p ng-switch-when="3">You entered Three...</p>
+		<p ng-switch-when="4">You entered Four...</p>
+		<p ng-switch-default>You're not following directions...</p>
+	</div>
+
+	<input ng-blur="blur=blur+1" ng-keydown="keydown($event)"/>
+	<h4>Blur events: {{blur}}</h4>
+	<h4>Key pressed: {{kdKey}}</h4>
+
+	<p>
+		<button ng-disabled="disableButton">Button</button>
+	</p>
+	<input type="checkbox" ng-model="disableButton">Disable
+<p>
+	<input type="checkbox" ng-model="dayTimeButton">Morning
+</p>
+<p ng-hide="!dayTimeButton">Good Morning</p>
+<p ng-hide="dayTimeButton">Good Evening</p>
+
+<p>
+	<select ng-model="textStyling">
+		<option value="bluetext">bluetext</option>
+		<option value="boldtext">boldtext</option>
+	</select>
+</p>
+<p ng-class="textStyling">Some text</p>
+
+<table>
+	<tr ng-repeat="item in capitals" ng-class-even="'stripedblue'" ng-class-odd="'stripedbeige'">
+		<td>{{item.city}}</td>
+		<td>{{item.country}}</td>
+	</tr>
+</table>
+
+</div>
+
+
+<script src="js/angular.min.js"></script>
+<script src="js/exam1.js"></script>
+</body>
+</html>
