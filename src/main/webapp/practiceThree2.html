@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="app3" ng-cloak>
+<meta charset="ISO-8859-1">
+<head>
+<title>Angular JS Practice</title>
+	<style>
+	[ng\:cloak],[ng-cloak],.ng-cloak{
+		display: none;
+	}
+	</style>
+</head>
+<body>
+
+<div ng-controller="playerCtrl" bb-player-list="bbPlayers" array-item="name | uppercase">
+</div>
+<div ng-controller="playerCtrl">
+	<player name="barryBonds"></player>
+</div>
+
+<script src="js/angular.min.js"></script>
+<script src="js/exam32.js"></script>
+</body>
+</html>
