@@ -11,11 +11,38 @@
 </head>
 <body>
 
-<div ng-controller="playerCtrl">
-	<player name="barryBonds"></player>
+<!-- <div ng-controller="mainCtrl"> -->
+
+</div>
+<div ng-controller="mainCtrl">
+	<input type="text" ng-model="userName"/>
+	<button ng-click="greetUser(userName)">Hello</button>
+	<br><br>
+
+	URL : {{currentURL}}<br><br>
+	Protocol : {{theProtocol}}<br><br>
+	Host : {{currHost}}<br><br>
+	Port : {{currPort}}<br><br>
+	Path : {{currPath}}<br><br>
+	Search : {{currSearch}}<br><br>
+
+	Time : {{time}}<br><br>
+
+	<label>Message:
+	<input type="text" ng-model="message"/></label>
+	<button ng-click="$log.log(message)">log</button>
+	<button ng-click="$log.warn(message)">warn</button>
+	<button ng-click="$log.info(message)">info</button>
+	<button ng-click="$log.log(message)">error</button>
+	<button ng-click="$log.debug(message)">debug</button><br><br>
+
+	<button type="text" ng-click="throwException">Throw</button>
+
 </div>
 
+<script src="js/angular-sanitize.js"></script>
 <script src="js/angular.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.js"></script> -->
 <script src="js/exam4.js"></script>
 </body>
 </html>

@@ -1,26 +1,57 @@
 angular.module('app4',[])
 
-.controller("playerCtrl",function($scope){
-	$scope.barryBonds = [
-		{name:"Barry Bonds", avg:0.298, hr:762,obp:0.444},
-		{name:"Hank Aron", avg:0.305, hr:755,obp:0.374},
-		{name:"Babe Ruth", avg:0.342, hr:714,obp:0.474},
-		{name:"Ted Williams", avg:0.344, hr:521,obp:0.482}
-	];
+/*.service('HelloService', function(){
+	this.helloService = function(){
+			console.log("Hello Service");
+	};
 })
-.directive('player',function(){
-	var directive = {};
-	directive.restrict = 'E';
-	directive.template = "{{player.name}} had a {{player.avg} AVG with {{player.hr}} homeruns and a {{player.obp}} OBP}";
 
-	directive.scope = {player: "=name"};
-	directive.compile = function(element,attributes){
-		var linkFunc = function($scope, element, attributes){
-			element.bind('click',function(){
-				element.html('Barry disappeard')
-			});
-		}
-		return linkFunc;
+.factory('HelloFactory',function(){
+	var factory = {};
+
+	factory.helloFactory = function(){
+		console.log('Hello Factory');
+	};
+	return factory;
+})
+
+app4.controller('mainCtrl',function(HelloService,HelloFactory){
+	HelloService.helloService();
+	HelloFactory.helloFactory();
+});*/
+
+.controller('mainCtrl',function($scope, $window, $location, $interval, $log, $exceptionHandler){
+	$scope.greetUser = function(userName){
+		console.log(userName);
+		$window.alert('Hello '+userName);
 	}
-	return directive;
+	$scope.currentURL = $location.absUrl();
+	$scope.theProtocol = $location.protocol();
+	$scope.currHost = $location.host();
+	$scope.currPort = $location.port();
+	$location.path("#/the/path");
+	$scope.currPath = $location.path();
+	$location.search("random=stuff");
+	$scope.currSearch = $location.search();
+
+	$interval(function(){
+		var hour = new Date().getHours();
+		var minutes = ('0' + new Date().getMinutes()).slice(-2);
+		var seconds = ('0' + new Date().getSeconds()).slice(-2);
+		$scope.time = hour + ":" + minutes + ":" + seconds;
+	},2000);
+
+	$scope.$log = $log;
+
+	$scope.throwException = function(){
+		try {
+			throw new Error("Exception Thrown");
+		} catch (e) {
+			$exceptionHandler(e.message, "Caught exception");
+		} finally {
+			console.log('From finally block');
+		}
+	};
+
+
 });
